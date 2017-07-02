@@ -25,7 +25,7 @@ Route::get('/login', function() {
 
 Route::get('/logoff', function(){
     Session::flush();
-    return view('welcome');
+    return redirect('/');
 });
 
 Route::post('/loginme', 'loginController@login');

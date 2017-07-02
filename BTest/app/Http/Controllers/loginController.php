@@ -17,11 +17,17 @@ class loginController extends BaseController
 
     public function exist($email, $password)
     {
-        $checklogin = DB::table('t_users')->where(['email'=>$email, 'password'=>$password])->first();
+        $checklogin = DB::table('t_users')->where(['email'=>$email])->first();
 
-        if (count($checklogin) > 0)
-            return $checklogin->id;
-        return -1;
+
+        if (count($checklogin) > 0) {
+            $checklogin->id;
+            if (!password_verify($password, '$2y$10$' . $checklogin->password))
+                return false;
+            Session::put('user_id', $checklogin);
+            return true;
+        }
+        return false;
     }
 
     public function login(Request $req)
@@ -29,20 +35,20 @@ class loginController extends BaseController
         $email = $req->input('email');
         $password = $req->input('password');
 
-        echo "-<".$email.">-";
-        echo "-<".$password.">-";
 
         $checklogin = loginController::exist($email, $password);
-        if ($checklogin >= 0)
+        if ($checklogin)
         {
-            Session::put('user_id', $checklogin);
+
             echo "Login Success";
-            return view('homelog');
+            //return view('homelog');
+            return redirect('/');
         }
         else
         {
             echo "Login failed";
-            return view('login');
+            /* TODO: error code system */
+            return redirect('/');
         }
     }
 }
