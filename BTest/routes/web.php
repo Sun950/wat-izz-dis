@@ -11,11 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    if (Session::has('user_id'))
-        return view('homelog');
-    return view('welcome');
-});
+Route::get('/', 'homeController@home');
 
 Route::get('/register', function (){
     return view('register');
