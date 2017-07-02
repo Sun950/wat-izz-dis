@@ -11,7 +11,7 @@
     <div class="title">
         <h1>Wat-izz-Dis</h1>
     </div>
-    <a href="http://localhost/php-project/projet-php/BTest/public/logoff">Log off</a>
+    <a href="http://localhost/wat-izz-dis/BTest/public/logoff">Log off</a>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
