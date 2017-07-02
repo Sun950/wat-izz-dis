@@ -12,9 +12,24 @@
 */
 
 Route::get('/', function () {
+    if (Session::has('user_id'))
+        return view('homelog');
     return view('welcome');
 });
+
+Route::get('/register', function (){
+    return view('register');
+});
+
+Route::post('/register', 'registerController@subscribe');
+
 Route::get('/login', function() {
     return view('login');
 });
+
+Route::get('/logoff', function(){
+    Session::flush();
+    return view('welcome');
+});
+
 Route::post('/loginme', 'loginController@login');
