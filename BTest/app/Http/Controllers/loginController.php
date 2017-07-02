@@ -19,7 +19,6 @@ class loginController extends BaseController
     {
         $checklogin = DB::table('t_users')->where(['email'=>$email, 'password'=>$password])->first();
 
-        echo $checklogin->id;
         if (count($checklogin) > 0)
             return $checklogin->id;
         return -1;
@@ -29,6 +28,9 @@ class loginController extends BaseController
     {
         $email = $req->input('email');
         $password = $req->input('password');
+
+        echo "-<".$email.">-";
+        echo "-<".$password.">-";
 
         $checklogin = loginController::exist($email, $password);
         if ($checklogin >= 0)
