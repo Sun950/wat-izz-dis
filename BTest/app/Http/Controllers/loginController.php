@@ -41,7 +41,6 @@ class loginController extends BaseController
         {
 
             echo "Login Success";
-            //return view('homelog');
             return redirect('/');
         }
         else

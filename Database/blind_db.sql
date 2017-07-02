@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 29 Juin 2017 à 21:34
+-- Généré le :  Dim 02 Juillet 2017 à 21:41
 -- Version du serveur :  5.7.14
--- Version de PHP :  7.0.10
+-- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -31,7 +31,6 @@ CREATE TABLE `t_questions` (
   `test_id` bigint(20) UNSIGNED NOT NULL,
   `youtube_url` varchar(200) NOT NULL COMMENT 'link to the youtube test'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- Erreur de lecture des données :  (#2014 - Commands out of sync; you can't run this command now)
 
 -- --------------------------------------------------------
 
@@ -46,7 +45,6 @@ CREATE TABLE `t_score` (
   `score` int(11) NOT NULL DEFAULT '0' COMMENT 'total score on the test',
   `question_succeed` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'number of question correctly answered'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- Erreur de lecture des données :  (#2014 - Commands out of sync; you can't run this command now)
 
 -- --------------------------------------------------------
 
@@ -59,7 +57,6 @@ CREATE TABLE `t_tests` (
   `owner_id` bigint(20) UNSIGNED NOT NULL COMMENT 'id of the creator',
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- Erreur de lecture des données :  (#2014 - Commands out of sync; you can't run this command now)
 
 -- --------------------------------------------------------
 
@@ -72,10 +69,15 @@ CREATE TABLE `t_users` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(30) NOT NULL,
-  `salt` varchar(10) NOT NULL
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- Erreur de lecture des données :  (#2014 - Commands out of sync; you can't run this command now)
+
+--
+-- Contenu de la table `t_users`
+--
+
+INSERT INTO `t_users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
+(3, 'test', 'test', 'test@test.fr', 'HZB.Z98CdNKsqDOqTuw23.cjhMpJn19HMeNUXYsIqqwJyeYnqaUDq');
 
 --
 -- Index pour les tables exportées
@@ -128,12 +130,12 @@ ALTER TABLE `t_score`
 -- AUTO_INCREMENT pour la table `t_tests`
 --
 ALTER TABLE `t_tests`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `t_users`
 --
 ALTER TABLE `t_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Contraintes pour les tables exportées
 --
