@@ -39,15 +39,11 @@ class loginController extends BaseController
         $checklogin = loginController::exist($email, $password);
         if ($checklogin)
         {
-
-            echo "Login Success";
             return redirect('/');
         }
         else
         {
-            echo "Login failed";
-            /* TODO: error code system */
-            return redirect('/');
+            return view('welcome')->with('error_code', 1);
         }
     }
 }

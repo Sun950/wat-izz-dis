@@ -54,34 +54,34 @@ class RegisterCheckTest extends TestCase
     {
         $password = "test1234";
         $controller = new \BTest\Http\Controllers\registerController();
-        assert($controller->control_password($password) === 1);
+        assert($controller->control_password($password) === 2);
     }
 
     public function test_control_password_bad_nomin()
     {
         $password = "TEST1234";
         $controller = new \BTest\Http\Controllers\registerController();
-        assert($controller->control_password($password) === 1);
+        assert($controller->control_password($password) === 2);
     }
 
     public function test_control_password_bad_nonum()
     {
         $password = "TestTest";
         $controller = new \BTest\Http\Controllers\registerController();
-        assert($controller->control_password($password) === 1);
+        assert($controller->control_password($password) === 2);
     }
 
     public function test_control_password_bad_tooshort()
     {
         $password = "Te5t";
         $controller = new \BTest\Http\Controllers\registerController();
-        assert($controller->control_password($password) === 2);
+        assert($controller->control_password($password) === 3);
     }
 
     public function test_control_password_bad_toolong()
     {
         $password = "Test1234Test1234Test1234";
         $controller = new \BTest\Http\Controllers\registerController();
-        assert($controller->control_password($password) === 2);
+        assert($controller->control_password($password) === 3);
     }
 }

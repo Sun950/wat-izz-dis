@@ -38,11 +38,11 @@ class registerController extends BaseController
     {
         $result = 0;
         if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])#', $password)) {
-            $result = 1;
+            $result = 2;
         }
 
         if (strlen($password) < 8 || strlen($password) > 20) {
-            $result = 2;
+            $result = 3;
         }
         return $result;
     }
@@ -61,16 +61,13 @@ class registerController extends BaseController
 
         if (!$this->control_email($email))
         {
-            /* TODO: Error code system */
-            echo "Code 01";
-            return redirect('/register');
+            return view('register')->with('error_code', 1);
         }
 
-        if ($this->control_password($password) !== 0)
+        $test_password = $this->control_password($password);
+        if ($test_password !== 0)
         {
-            /* TODO: Error code system */
-            echo "Code 02";
-            return redirect('/register');
+            return view('register')->with('error_code', $test_password);
         }
 
         $pass_step1 = password_hash($password, PASSWORD_BCRYPT);
@@ -79,9 +76,7 @@ class registerController extends BaseController
         $result = registerController::insert($firstname, $lastname, $email, $pass_step2);
         if (!$result)
         {
-            /* TODO: Error code system */
-            echo "code 04";
-            return redirect('/register');
+            return view('register')->with('error_code', 4);
         }
         return redirect('/');
 

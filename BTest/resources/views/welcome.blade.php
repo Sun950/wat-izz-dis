@@ -17,6 +17,14 @@
         </div>
         <div class="login-container">
             <h2 class="marged">Sign-in and start now !</h2>
+    <?php if (isset($error_code))
+    {
+        if ($error_code === 1)
+        {
+            echo '<label>Error: invalid informations</label>';
+        }
+    }
+    ?>
             <div class="login-container-forms">
                 <form class="login-form" action="loginme" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
