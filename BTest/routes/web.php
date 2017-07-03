@@ -30,6 +30,10 @@ Route::get('/logoff', function(){
 
 Route::post('/loginme', 'loginController@login');
 
-Route::get('/play/{id}', 'playController@play');
+Route::get('/start/{id}', 'playController@play');
+
+Route::get('/play/{id}', 'playController@answer');
+
+Route::get('/result', 'playController@result');
 
 Route::get('/search/{string}', 'searchController@search');

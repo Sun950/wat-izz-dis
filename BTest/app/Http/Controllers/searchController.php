@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use View;
+use URL;
 
 class searchController extends BaseController
 {
@@ -20,27 +21,36 @@ class searchController extends BaseController
 
     public function search($string)
     {
-        $content = file_get_contents('http://www.imdb.com/xml/find?json=1&q=' . $string);
+        $content = file_get_contents('https://v2.sg.media-imdb.com/suggests/' . $string[0] . '/' . $string . '.json');
+
+        $pos = strpos($content, '(');
+        $content = substr($content, $pos + 1);
+        $content = rtrim($content, ')');
 
         $json = json_decode($content);
 
-        print('<div id="content">');
+        echo '<div id="navbar-suggestionsearch" style="left: 140px; top: 38px; width: 534px;">';
 
-        if( array_key_exists('title_exact', $json) ){
-            $exact = $json->{'title_exact'};
+        if( array_key_exists('d', $json) ){
+            $exact = $json->{'d'};
             foreach ($exact as $elt)
             {
-                print("<a value='". $elt->{'id'}) ."'>" . $elt->{'title'} . " - " . $elt->{'title_description'} . "</a><br>";
-            }
-        }
-
-        print('<br><br>');
-
-        if( array_key_exists('title_approx', $json) ){
-            $exact = $json->{'title_approx'};
-            foreach ($exact as $elt)
-            {
-                print("<a value='". $elt->{'id'}) ."'>" . $elt->{'title'} . " - " . $elt->{'title_description'} . "</a><br>";
+                if (!strpos($elt->{'id'}, 'tt')) {
+                    ?>
+                    <a href="<?php echo URL::to('/play/' . $elt->{'id'}); ?>" class="poster highlighted">
+                        <img src="<?php if (array_key_exists('i', $elt)) echo $elt->{'i'}[0]; ?>"
+                             style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40"
+                             height="54">
+                        <div class="suggestionlabel">
+                        <span class="title">
+                            <?php echo $elt->{'l'}; ?>
+                        </span>
+                            <span class="extra"><?php if (array_key_exists('y', $elt)) echo $elt->{'y'}; ?></span>
+                            <div class="detail"><?php if (array_key_exists('s', $elt)) echo $elt->{'s'}; ?></div>
+                        </div>
+                    </a>
+                    <?php
+                }
             }
         }
 

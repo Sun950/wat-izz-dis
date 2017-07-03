@@ -8,6 +8,7 @@ class Question
     private $imdb_id;
     private $number;
     private $name;
+    private $points;
 
     /**
      * Question constructor.
@@ -18,7 +19,7 @@ class Question
      * @param $number
      * @param $name
      */
-    public function __construct($id, $test_id, $youtube_url, $imdb_id, $number, $name)
+    public function __construct($id, $test_id, $youtube_url, $imdb_id, $number, $name, $points)
     {
         $this->id = $id;
         $this->test_id = $test_id;
@@ -26,6 +27,7 @@ class Question
         $this->imdb_id = $imdb_id;
         $this->number = $number;
         $this->name = $name;
+        $this->points = $points;
     }
 
     /**
@@ -123,5 +125,23 @@ class Question
     {
         $this->name = $name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPoints()
+    {
+        return $this->points;
+    }
+
+    /**
+     * @param mixed $points
+     */
+    public function setPoints($points)
+    {
+        $this->points = $points;
+    }
+
+
 
 }

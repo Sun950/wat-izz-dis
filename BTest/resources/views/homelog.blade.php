@@ -24,8 +24,8 @@
                                 <th>Author</th>
                                 @foreach($ltest as $item)
                                     <tr>
-                                        <td><a href="nothing"> {{ $item->getName() }}</a></td>
-                                        <td><a href="nothing"> {{ $item->getOwnerId() }}</a></td>
+                                        <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getName() }}</a></td>
+                                        <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getOwnerId() }}</a></td>
                                     </tr>
                                 @endforeach
                             </table>

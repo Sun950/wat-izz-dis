@@ -4,11 +4,13 @@ class TestModel
 {
     private $_owner_id;
     private $_name;
+    private $_id;
 
-    public function __construct($owner_id, $name)
+    public function __construct($owner_id, $name, $id)
     {
         $this->_owner_id = $owner_id;
         $this->_name = $name;
+        $this->_id = $id;
     }
 
     /**
@@ -42,4 +44,22 @@ class TestModel
     {
         $this->_owner_id = $owner_id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
+
+
 }

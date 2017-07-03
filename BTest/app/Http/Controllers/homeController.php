@@ -26,7 +26,7 @@ class homeController extends BaseController
 
         foreach ($query as $data)
         {
-            array_push($result, new \TestModel($data->owner_id, $data->name));
+            array_push($result, new \TestModel($data->owner_id, $data->name, $data->id));
         }
 
         return $result;

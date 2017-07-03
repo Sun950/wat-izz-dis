@@ -24,7 +24,7 @@ class loginController extends BaseController
             $checklogin->id;
             if (!password_verify($password, '$2y$10$' . $checklogin->password))
                 return false;
-            Session::put('user_id', $checklogin);
+            Session::put('user_id', $checklogin->id);
             return true;
         }
         return false;
