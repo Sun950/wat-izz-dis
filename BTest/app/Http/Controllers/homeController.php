@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-include (app_path().'/model/TestModel.php');
+include (app_path().'/Model/TestModel.php');
 
 use View;
 use DB;
