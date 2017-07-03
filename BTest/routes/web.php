@@ -37,3 +37,7 @@ Route::get('/play/{id}', 'playController@answer');
 Route::get('/result', 'playController@result');
 
 Route::get('/search/{string}', 'searchController@search');
+
+Route::get('/leaderboard', 'LeaderboardSelectController@Selector');
+
+Route::get('/leaderboard/{test_id}', 'LeaderboardController@Leaderboard');
