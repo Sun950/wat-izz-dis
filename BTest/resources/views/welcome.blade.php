@@ -30,7 +30,7 @@
                     </div>
                     <input type="submit" class="submit-button btn btn-default" value="Connect">
                 </form>
-                <a href="http://localhost/wat-izz-dis/BTest/public/register">Register</a>
+                <a href="register">Register</a>
             </div>
         </div>
     </div>

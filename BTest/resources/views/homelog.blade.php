@@ -11,7 +11,7 @@
     <div class="title">
         <h1>Wat-izz-Dis</h1>
     </div>
-    <a href="http://localhost/wat-izz-dis/BTest/public/logoff">Log off</a>
+    <a href="logoff">Log off</a>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -28,22 +28,6 @@
                                         <td><a href="nothing"> {{ $item->getOwnerId() }}</a></td>
                                     </tr>
                                 @endforeach
-                                <!--<tr>
-                                    <td><a href="link.php">Les musiques de papy</a></td>
-                                    <td><a href="link_author.php">Brazy</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="link.php">Brasegajames le bandit de la MTI</a></td>
-                                    <td><a href="link_author.php">Le wanski</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="link.php">Les musiques de papy</a></td>
-                                    <td><a href="link_author.php">Brazy</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="link.php">Brasegajames le bandit de la MTI</a></td>
-                                    <td><a href="link_author.php">Le wanski</a></td>
-                                </tr>-->
                             </table>
                         </div>
                     </div>
