@@ -29,7 +29,7 @@
         }
         else if ($error_code === 4)
         {
-            echo '<label>Error: this email is already in the Database</label>';
+            echo '<label>Error: this email is already choose</label>';
         }
 
      }?>

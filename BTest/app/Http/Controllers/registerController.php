@@ -21,7 +21,7 @@ class registerController extends BaseController
             DB::table('t_users')->insertGetId(['firstname'=>$firtname, 'lastname'=>$lastname, 'email'=>$email, 'password'=>$password]);
             return true;
         }
-        catch(Exception $e) {
+        catch(\Illuminate\Database\QueryException $e) {
             return false;
         }
     }
