@@ -41,7 +41,7 @@ class registerController extends BaseController
             $result = 1;
         }
 
-        if (strlen($password) < 8 && strlen($password) > 20) {
+        if (strlen($password) < 8 || strlen($password) > 20) {
             $result = 2;
         }
         return $result;
