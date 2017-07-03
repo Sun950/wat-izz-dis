@@ -29,3 +29,7 @@ Route::get('/logoff', function(){
 });
 
 Route::post('/loginme', 'loginController@login');
+
+Route::get('/play/{id}', 'playController@play');
+
+Route::get('/search/{string}', 'searchController@search');

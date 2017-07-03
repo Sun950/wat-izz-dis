@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 02 Juillet 2017 à 21:41
+-- Généré le :  Lun 03 Juillet 2017 à 09:24
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -29,7 +29,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `t_questions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `test_id` bigint(20) UNSIGNED NOT NULL,
-  `youtube_url` varchar(200) NOT NULL COMMENT 'link to the youtube test'
+  `youtube_url` varchar(200) NOT NULL COMMENT 'link to the youtube test',
+  `imdb_id` varchar(20) NOT NULL,
+  `number` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -73,13 +75,6 @@ CREATE TABLE `t_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `t_users`
---
-
-INSERT INTO `t_users` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
-(3, 'test', 'test', 'test@test.fr', 'HZB.Z98CdNKsqDOqTuw23.cjhMpJn19HMeNUXYsIqqwJyeYnqaUDq');
-
---
 -- Index pour les tables exportées
 --
 
@@ -120,7 +115,7 @@ ALTER TABLE `t_users`
 -- AUTO_INCREMENT pour la table `t_questions`
 --
 ALTER TABLE `t_questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `t_score`
 --
@@ -130,12 +125,12 @@ ALTER TABLE `t_score`
 -- AUTO_INCREMENT pour la table `t_tests`
 --
 ALTER TABLE `t_tests`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `t_users`
 --
 ALTER TABLE `t_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --
