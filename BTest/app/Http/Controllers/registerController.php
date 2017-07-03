@@ -28,14 +28,23 @@ class registerController extends BaseController
 
     public function control_email($email)
     {
-        /* TODO */
-        return true;
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+            return true;
+        }
+        return false;
     }
 
     public function control_password($password)
     {
-        /* TODO */
-        return true;
+        $result = 0;
+        if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])#', $password)) {
+            $result = 1;
+        }
+
+        if (strlen($password) < 8 && strlen($password) > 20) {
+            $result = 2;
+        }
+        return $result;
     }
 
     public function prepare_password($password)
@@ -54,14 +63,14 @@ class registerController extends BaseController
         {
             /* TODO: Error code system */
             echo "Code 01";
-            return redirect('/');
+            return redirect('/register');
         }
 
-        if (!$this->control_password($password))
+        if ($this->control_password($password) !== 0)
         {
             /* TODO: Error code system */
             echo "Code 02";
-            return redirect('/');
+            return redirect('/register');
         }
 
         $pass_step1 = password_hash($password, PASSWORD_BCRYPT);
@@ -72,7 +81,7 @@ class registerController extends BaseController
         {
             /* TODO: Error code system */
             echo "code 04";
-            return redirect('/');
+            return redirect('/register');
         }
         return redirect('/');
 
