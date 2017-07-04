@@ -17,6 +17,6 @@ class RegisterSecurityTest extends TestCase
 
         $test = substr($finalpassword, 0, 6);
 
-        assert($test !== "$2y$10$");
+        $this->assertNotEquals("$2y$10$", $test);
     }
 }
