@@ -156,3 +156,8 @@ table {
     border-bottom: 20px solid #6DBDD6;
     border-left: 15px solid #0971B2;
 }
+
+#footer {
+    background: #383b43;
+    padding: 4em 0em 3em;
+}

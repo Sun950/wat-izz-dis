@@ -11,7 +11,7 @@
 
     <div class="container-fluid">
         <h1>Bonjour {{ $user->firstname }} !</h1>
-        <h2>Venez essayer les derniers quizz ajouté sur le site</h2>
+        <h2>Venez essayer les derniers quizz ajoutés sur le site</h2>
         <table id="ver-minimalist">
             <th>Quiz</th>
             <th>Auteur</th>
@@ -20,15 +20,15 @@
             <th>Lancer</th>
             @foreach($ltest as $item)
                 <tr>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getName() }}</a></td>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getFirstname() }}</a></td>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbQuestion() }}</a></td>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbPoints() }}</a></td>
+                    <td>{{ $item->getName() }}</td>
+                    <td>{{ $item->getFirstname() }}</td>
+                    <td>{{ $item->getNbQuestion() }}</td>
+                    <td>{{ $item->getNbPoints() }}</td>
                     <td><a href="{{URL::to('/start/' . $item->getId())}}"><div class="arrow">Go !</div></a></td>
                 </tr>
             @endforeach
         </table>
     </div>
-</div>
+
 </body>
 </html>

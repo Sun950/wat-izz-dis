@@ -7,6 +7,8 @@
     <title>Wat-izz-Dis - welcome</title>
 </head>
 <body>
+@include('layout.header')
+
     <h1 class="text-center">Leaderboard</h1>
 
     <div class="container text-center">

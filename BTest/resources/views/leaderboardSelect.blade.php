@@ -7,14 +7,18 @@
     <title>Wat-izz-Dis - welcome</title>
 </head>
 <body>
-<h1 class="text-center">Leaderboard : Select the test</h1>
+@include('layout.header')
+
+<h1 class="text-center">Top des joueurs par test</h1>
+
+<h2>Sélectionnez le test :</h2>
 
 <div class="container">
     @foreach($list_tests as $test)
 
         <div class="row">
             <div class="col-sm-offset-4 col-sm-4">
-                <a href={{URL::to('/leaderboard/'. $test->getTestId())}}>
+                <a href="{{URL::to('/leaderboard/'. $test->getTestId())}}" style="color: white;">
                     {{$test->getTestName()}}
                 </a>
             </div>
