@@ -228,7 +228,7 @@
                         <section class="box">
                             <i class="icon big rounded color6 glyphicon glyphicon-picture"></i>
                             <h3>Un quizz multi-media</h3>
-                            <p>Que vous soyez fan de films, séries, animé, jeux vidéo, vous trouverez votre bonheur ici !</p>
+                            <p>Que vous soyez fan de films, séries, jeux vidéo, vous trouverez votre bonheur ici !</p>
                         </section>
                     </div>
                 </div>
