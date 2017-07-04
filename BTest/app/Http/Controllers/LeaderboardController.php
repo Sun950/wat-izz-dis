@@ -25,7 +25,7 @@ class LeaderboardController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private function LeaderboardQuery($test_id)
+    public function LeaderboardQuery($test_id)
     {
         $query = DB::table('t_score')
             ->where('test_id', '=', $test_id)
@@ -41,11 +41,11 @@ class LeaderboardController
         return $query;
     }
 
-    private function getLeaderboardRows($test_id)
+    public function getLeaderboardRows($test_id)
     {
         $list = array();
 
-        $query = LeaderboardQuery($test_id);
+        $query = $this->LeaderboardQuery($test_id);
 
         foreach ($query as $data)
         {

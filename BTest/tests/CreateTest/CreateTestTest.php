@@ -150,4 +150,36 @@ class CreateTestTest extends TestCase
         $result = $controller->CheckValidEntry($test_name, $answer1, $url1, $point1);
         $this->assertFalse($result);
     }
+
+    /************************ValidPointTest***************************/
+
+    public function test_ValidPoint_good01()
+    {
+        $controller = new CreateTestController();
+
+        $point = 42;
+
+        $result = $controller->ValidPoint($point);
+        $this->assertTrue($result);
+    }
+
+    public function test_ValidPoint_bad01()
+    {
+        $controller = new CreateTestController();
+
+        $point = -1;
+
+        $result = $controller->ValidPoint($point);
+        $this->assertFalse($result);
+    }
+
+    public function test_ValidPoint_bad02()
+    {
+        $controller = new CreateTestController();
+
+        $point = 100000;
+
+        $result = $controller->ValidPoint($point);
+        $this->assertFalse($result);
+    }
 }

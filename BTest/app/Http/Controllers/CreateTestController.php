@@ -119,13 +119,13 @@ class CreateTestController
 
                 if (!is_null($url) && !is_null($anwser) && !is_null($point))
                 {
-                    if (!$this->ValidQuestion($anwser, $url ,$point) || $this->ValidPoint($point_test))
+                    if (!$this->ValidQuestion($anwser, $url ,$point) || !$this->ValidPoint($point_test))
                     {
                         if (empty($url) && !empty($url_brut))
                         {
                             return "Error, make sure the url is a youtube video";
                         }
-                        if ($this->ValidPoint($point_test))
+                        if (!$this->ValidPoint($point_test))
                         {
                             return "Error, Point have to be greater than 0 and lower than 100000";
                         }
