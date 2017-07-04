@@ -25,10 +25,8 @@ class LeaderboardController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private function getLeaderboardRows($test_id)
+    private function LeaderboardQuery($test_id)
     {
-        $list = array();
-
         $query = DB::table('t_score')
             ->where('test_id', '=', $test_id)
             ->join('t_users', 't_score.user_id', '=', 't_users.id')
@@ -39,6 +37,15 @@ class LeaderboardController
                 't_score.score as score',
                 't_score.question_succeed as question_succeed')
             ->get();
+
+        return $query;
+    }
+
+    private function getLeaderboardRows($test_id)
+    {
+        $list = array();
+
+        $query = LeaderboardQuery($test_id);
 
         foreach ($query as $data)
         {

@@ -34,7 +34,7 @@
                 </div>
                 <div class="right-pannel col-md-5">
                     <div class="button-container">
-                        <form action="create-quizz.php" role="form">
+                        <form action="create-quizz" role="form">
                             <button type="submit" class="btn btn-default">Create new</button>
                         </form>
                         <form action="my-quizzes.php" role="form">
