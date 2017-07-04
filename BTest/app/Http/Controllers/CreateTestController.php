@@ -40,11 +40,16 @@ class CreateTestController
             );
     }
 
-    private function ValidQuestion($answer, $score)
+    private function ValidQuestion($answer, $url, $score)
     {
         $valid = true;
 
         if (empty($answer))
+        {
+            return false;
+        }
+
+        if (empty($url))
         {
             return false;
         }
@@ -63,7 +68,24 @@ class CreateTestController
             return false;
         }
 
+        $answer1 = $req->input('imdb_1');
+        $url1 = $req->input('url_1');
+        $point1 = $req->input('points_1');
+        if (!$this->ValidQuestion($answer1, $url1, $point1))
+        {
+            return false;
+        }
+
         return true;
+    }
+
+    private function getYoutubeUrlValue($url)
+    {
+        $separator = '?v=';
+        $pos = strpos($url, $separator);
+
+        $result = substr($url, $pos + 3);
+        return $result;
     }
 
     public function CreateTest(Request $req)
@@ -71,46 +93,43 @@ class CreateTestController
         $Valid = $this->CheckValidEntry($req);
         if (!$Valid)
         {
-            echo("Invalid quizz name");
-            return;
+            echo("Invalid quizz name or at least one question is required");
         }
-        $count = 0;
-        $test_id = null;
-        foreach($req->all() as $name => $value)
+        else
         {
-            if ($name == 'test_name')
-            {
-                $test_id = $this->SaveTest($value);
-                if (is_null($test_id))
-                {
-                    echo("Failed to create test");
-                    return;
-                }
+            $test_name_value = $req->input('test_name');
+            $test_id = $this->SaveTest($test_name_value);
+            if (is_null($test_id)) {
+                echo("Failed to create test");
             }
-            if (substr($name, 0, 5) == 'imdb_')
-            {
-                $count += 1;
-                //echo($name . ' : ' . $value . ' with is the q number ' . $count);
-                //echo('<br/>');
 
-                foreach($req->all() as $point_name => $point_value)
+            $count = 1;
+            foreach($req->all() as $name)
+            {
+
+                $url = $req->input('url_' . $count);
+                $url = $this->getYoutubeUrlValue($url);
+                $anwser = $req->input('imdb_' . $count);
+                $point = $req->input('points_' . $count);
+
+                if (!is_null($url) && !is_null($anwser) && !is_null($point))
                 {
-                    if ($point_name == 'points_' . $count)
+                    if ($this->ValidQuestion($anwser, $url ,$point))
                     {
-                        //echo($point_name . ' : ' . $point_value);
-                        //echo('<br/>');
-                        if ($this->ValidQuestion($value, $point_value))
-                        {
-                            $this->SaveQuestion($test_id, 'url/fixme', $value, $count, $point_value);
-                        }
-                        else
-                        {
-                            echo("Failed to create question");
-                            return;
-                        }
+                        $this->SaveQuestion($test_id, $url, $anwser, $count, $point);
+                    }
+                    else
+                    {
+                        echo("One question was invalid");
                         break;
                     }
                 }
+                else //stop case, no more questions
+                {
+                    break;
+                }
+
+                $count++;
             }
         }
     }
