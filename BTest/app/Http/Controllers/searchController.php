@@ -53,16 +53,6 @@ class searchController extends BaseController
                 }
             }
         }
-
-        /*print('<br><br>');
-
-        if( array_key_exists('title_popular', $json) ){
-            $exact = $json->{'title_popular'};
-            foreach ($exact as $elt)
-            {
-                print("<a value='". $elt->{'id'}) ."'>" . $elt->{'title'} . " " . $elt->{'title_description'} . "</a><br>";
-            }
-        }*/
         print('</div>');
         return "";
     }

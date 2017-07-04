@@ -3,6 +3,9 @@
 namespace BTest\Http\Controllers;
 
 include (app_path().'/model/Question.php');
+include (app_path().'/model/SessionPlay.php');
+include (app_path().'/model/Result.php');
+include (app_path().'/model/IMDb.php');
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -27,73 +30,117 @@ class playController extends BaseController
             ->where('number', $question_number)
             ->first();
 
-        return new \Question($data->test_id, $data->test_id, $data->youtube_url, $data->imdb_id, $data->number, $data->name, $data->points);
+        return new \Question($data->id, $data->test_id, $data->youtube_url, $data->imdb_id, $data->number, $data->name, $data->points);
     }
 
-    public function play($id)
+    public function get_all_questions($id_test)
     {
-        Session::put('current_play', $id);
+        $data = DB::table('t_questions')
+            ->leftJoin('t_tests', 't_tests.id', '=', 't_questions.test_id')
+            ->where('test_id', $id_test)
+            ->get();
 
-        $questions = DB::table('t_questions')->where('test_id', $id)->count();
+        $questions = array();
 
-        Session::put('total_questions', $questions);
+        foreach ($data as $question) {
+            array_push($questions, new \Question($question->id, $question->test_id, $question->youtube_url, $question->imdb_id, $question->number, $question->name, $question->points));
+        }
 
-        Session::put('current_question', 1);
+        return $questions;
+    }
 
-        Session::put('correct_answer', 0);
+    public function play($id) // PATH : start/{id}
+    {
+        $nb_questions = DB::table('t_questions')->where('test_id', $id)->count();
 
-        Session::put('score', 0);
+        $question = playController::get_question($id, 1);
 
-        $question_number = Session::get('current_question');
+        $sessionPlay = new \SessionPlay($id, $question->getName(), $nb_questions, 1);
 
-        $question = playController::get_question($id, $question_number);
+        Session::put('sessionPlay', $sessionPlay);
 
         return View::make('play')->with('question', $question);
     }
 
-    public function answer($id)
+    public function answer($answer) // PATH : play/{answer}
     {
-        $question_number = Session::get('current_question');
-        $id_quizz = Session::get('current_play');
+        if (Session::get('sessionPlay') == null)
+            return redirect("/");
 
-        $old_question = playController::get_question($id_quizz, $question_number);
+        $sessionPlay = Session::get('sessionPlay');
 
-        if ($old_question->getImdbId() == $id)
-        {
-            $score = Session::get('score') + $old_question->getPoints();
-            Session::put('score', $score);
+        $sessionPlay->addAnswer($answer);
 
-            $correct_answer = Session::get('correct_answer') + 1;
-            Session::put('correct_answer', $correct_answer);
-        }
+        $sessionPlay->nextQuestion();
 
-        $question_number = Session::get('current_question');
-        ++$question_number;
-        Session::put('current_question', $question_number);
-        $total = Session::get('total_questions');
-        if ($question_number > $total)
+        Session::put('sessionPlay', $sessionPlay);
+
+        if ($sessionPlay->isFinished())
         {
             return redirect('/result');
         }
 
-        $question = playController::get_question($id_quizz, $question_number);
+        print_r($sessionPlay);
+
+        $question = playController::get_question($sessionPlay->getIdQuiz(), $sessionPlay->getCurrentQuestion());
 
         return View::make('play')->with('question', $question);
     }
 
     public function result()
     {
-        $id_quizz = Session::get('current_play');
-        $correct_answer = Session::get('correct_answer');
-        $score = Session::get('score');
-        $user_id = Session::get('user_id');
+
+        $imdb = new \IMDb(true, true, 0);
+
+        $result = new \Result("test", 3);
+
+        $result->addResultDetail(new \ResultDetails(true, $imdb->find_by_id("tt2560140"), $imdb->find_by_id("tt2560140"), 1));
+
+        $result->addResultDetail(new \ResultDetails(false, $imdb->find_by_id("tt2560140"), $imdb->find_by_id("tt5574490"), 2));
+
+        $result->addResultDetail(new \ResultDetails(true, $imdb->find_by_id("tt5574490"), $imdb->find_by_id("tt5574490"), 3));
+
+        $result->setCorrectAnswer(2);
+
+        return View::make('result')->with('result', $result);
+
+        if (Session::get('sessionPlay') == null)
+            return redirect("/");
+
+        $sessionPlay = Session::get('sessionPlay');
+
+        $questions = resultController::get_all_questions($sessionPlay->getIdQuiz());
+
+        $result = new \Result($sessionPlay->getName(), $sessionPlay->getNbQuestions());
+
+        $total_points = 0;
+        $total_correct_answer = 0;
+
+        for ($i = 0; $i < count($questions); ++$i)
+        {
+            $question = $questions[$i];
+            $answer = $sessionPlay->getAnswer($i);
+
+            $resultDetails = new \ResultDetails($question->getImdbId() == $answer, $question->getImdbId(), $answer, $i);
+            $result->addResultDetail($resultDetails);
+
+            if ($question->getImdbId() == $answer)
+            {
+                ++$total_correct_answer;
+                $total_points += $question->getPoints();
+            }
+        }
+
+        $result->setCorrectAnswer($total_correct_answer);
 
         DB::table('t_score')->insert(
-            ['test_id' => $id_quizz, 'user_id' => $user_id, 'score' => $score, 'question_succeed' => $correct_answer]
+            ['test_id' => $sessionPlay->getIdQuiz(), 'user_id' => Session::get('user_id'), 'score' => $total_points, 'question_succeed' => $total_correct_answer]
         );
+
+        Session::forget('sessionPlay');
 
         //Session::put('current_play', -1);
 
-        echo "fini !";
+        return View::make('result')->with('result', $result);
     }
 }
