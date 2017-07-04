@@ -8,35 +8,35 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RegisterCheckTest extends TestCase
 {
-    public function control_email_good()
+    public function test_control_email_good()
     {
         $email = "test@test.fr";
         $controller = new \BTest\Http\Controllers\registerController();
-        assertTrue($controller->control_email($email));
+        assert($controller->control_email($email) == true);
     }
 
-    public function control_email_bad01()
+    public function test_control_email_bad01()
     {
         $email = "test";
         $controller = new \BTest\Http\Controllers\registerController();
-        assertFalse($controller->control_email($email));
+        assert($controller->control_email($email) == false);
     }
 
-    public function control_email_bad02()
+    public function test_control_email_bad02()
     {
         $email = "test@test.";
         $controller = new \BTest\Http\Controllers\registerController();
-        assertFalse($controller->control_email($email));
+        assert($controller->control_email($email) == false);
     }
 
-    public function control_email_bad03()
+    public function test_control_email_bad03()
     {
         $email = "@test.fr";
         $controller = new \BTest\Http\Controllers\registerController();
-        assertFalse($controller->control_email($email));
+        assert($controller->control_email($email) == false);
     }
 
-    public function control_password_good01()
+    public function test_control_password_good01()
     {
         $password = "Test1234";
         $controller = new \BTest\Http\Controllers\registerController();
