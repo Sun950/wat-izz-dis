@@ -17,7 +17,7 @@
     @foreach($list_tests as $test)
 
         <div class="row">
-            <div class="col-sm-offset-4 col-sm-4">
+            <div class="col-sm-offset-4 col-sm-4" style="padding: 5px;">
                 <a href="{{URL::to('/leaderboard/'. $test->getTestId())}}" style="color: white;">
                     {{$test->getTestName()}}
                 </a>

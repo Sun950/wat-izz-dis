@@ -11,35 +11,17 @@
 
     <h1 class="text-center">Leaderboard</h1>
 
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-3">
-                <h4>Nom du test</h4>
-            </div>
-            <div class="col-sm-3">
-                <h4>Utilisateur</h4>
-            </div>
-            <div class="col-sm-3">
-                <h4>Score</h4>
-            </div>
-            <div class="col-sm-3">
-                <h4>Bonnes réponses</h4>
-            </div>
-        </div>
+    <table id="ver-minimalist">
+        <th>Auteur</th>
+        <th>Score</th>
+        <th>Bonnes réponses</th>
         @foreach($list_row as $row)
-            <div class="col-sm-3">
-                {{$row->getTestName()}}
-            </div>
-            <div class="col-sm-3">
-                {{$row->getUserName()}}
-            </div>
-            <div class="col-sm-3">
-                {{$row->getScore()}}
-            </div>
-            <div class="col-sm-3">
-                {{$row->getQuestionSucceed()}}
-            </div>
+            <tr>
+                <td>{{$row->getUserName()}}</td>
+                <td>{{$row->getScore()}}</td>
+                <td>{{$row->getQuestionSucceed()}}</td>
+            </tr>
         @endforeach
-    </div>
+    </table>
 </body>
 </html>
