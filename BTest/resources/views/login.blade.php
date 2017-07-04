@@ -14,19 +14,19 @@
 </head>
 <body>
 <center>
-    <?php if (isset($error_code))
-    {
-        if ($error_code === 1)
-        {
-            echo '<label>Error: invalid identifier</label>';
-        }
-    }?>
     <h1 class="text-center">Se connecter</h1>
     <div class="text-center">
         <div class="row">
         </div>
         <br />
         <div>
+            <?php if (isset($error_code))
+            {
+                if ($error_code === 1)
+                {
+                    echo '<div class="alert alert-danger">Error: invalid identifier</div>';
+                }
+            }?>
             <div class="col-md-offset-2 col-md-8">
                 <form action="loginme" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
