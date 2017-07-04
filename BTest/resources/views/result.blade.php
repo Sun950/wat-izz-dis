@@ -188,21 +188,7 @@
     </style>
 </head>
 <body>
-    <header class="main-header clearfix">
-        <div class="container">
-            <div class="brand">
-                <a href="" class="logo" class="icon-list">Wat-izz-Dis</a>
-            </div>
-            <nav class="main-nav">
-                <ul class="menu">
-                    <li><a href=""><span class="menu-title">Classement</span></a></li>
-                    <li><a href=""><span class="menu-title">Créer un quiz</span></a></li>
-                    <li><a href=""><span class="menu-title">Mes quiz</span></a></li>
-                    <li><a href=""><span class="menu-title">Déconnexion</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    @include('layout.header')
     <div class="container-fluid">
         <div class="title">
             <h1>Resultats du quiz test</h1>
