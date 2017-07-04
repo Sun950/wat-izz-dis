@@ -130,12 +130,12 @@
                         </div>
                         <button class="btn btn-primary" id="remove_question" name="remove_question">
                             <div>
-                                <span style="font-size:1.5em;" class="glyphicon glyphicon-minus"></span>
+                                <span style="font-size:1em;" class="glyphicon glyphicon-minus"></span>
                             </div>
                         </button>
                         <button class="btn btn-primary" id="add_question" name="add_question">
                             <div>
-                                <span style="font-size:1.5em;" class="glyphicon glyphicon-plus"></span>
+                                <span style="font-size:1em;" class="glyphicon glyphicon-plus"></span>
                             </div>
                         </button>
                     </b>
