@@ -38,6 +38,8 @@ Route::get('/result', 'playController@result');
 
 Route::get('/search/{string}', 'searchController@search');
 
+Route::get('/search_select/{string}/{string2}', 'searchController@search_select');
+
 Route::get('/leaderboard', 'LeaderboardSelectController@Selector');
 
 Route::get('/leaderboard/{test_id}', 'LeaderboardController@Leaderboard');

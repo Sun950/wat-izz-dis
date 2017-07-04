@@ -112,6 +112,8 @@ class CreateTestController
                 $anwser = $req->input('imdb_' . $count);
                 $point = $req->input('points_' . $count);
 
+
+
                 if (!is_null($url) && !is_null($anwser) && !is_null($point))
                 {
                     if ($this->ValidQuestion($anwser, $url ,$point))

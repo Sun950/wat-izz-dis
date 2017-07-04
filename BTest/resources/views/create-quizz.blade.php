@@ -130,20 +130,20 @@
         Quizz name : <input type="text" name="test_name"><br/>
 
         <div id="questions">
-            <div id="q1">
-                Q1 - Video url : <input name="url_1" /> Answer : <input name="imdb_1" /> points: <input type="number" name="points_1" />
+            <div id="Q1">
+                Q1 - Video url : <input name="url_1" />
+                Answer : <input class="search_input" name="imdb_1" />
+                points: <input type="number" name="points_1" />
             </div>
         </div>
 
 
-        <input type="submit" name="CreateTest" value="create-quizz">
-    </form>
 
-    <div class="col-sm-5">
-        <input id="search_input" type="text" name="city">
         <div id="results">
         </div>
-    </div>
+
+        <input type="submit" name="CreateTest" value="create-quizz">
+    </form>
 
 
 </body>
@@ -152,38 +152,60 @@
     var nb = 1;
 
     $("#add_question").click(function () {
-    nb += 1;
-    $("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input name="imdb_' + nb + '"/> points: <input type="number" name="points_' + nb + '"/></div>');
+        nb += 1;
+        $("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input class="search_input" name="imdb_' + nb + '"/> points: <input type="number" name="points_' + nb + '"/></div>');
+            ini_search_input();
     })
 
     $("#remove_question").click(function () {
-    $("#Q" + nb).remove();
-    if (nb > 1)
-    nb -= 1;
+        if (nb > 1)
+        {
+            $("#Q" + nb).remove();
+            ini_search_input();
+            nb -= 1;
+        }
     })
 
 
     var timeout = null;
-    $('#search_input').on('keyup', function () {
-        var that = this;
-        if ($(that).val() == "")
-            $("#results").html('');
-        else
-        {
-            $("#results").html('<div class="loader"></div>');
 
-            if (timeout !== null) {
-                clearTimeout(timeout);
-            }
-            timeout = setTimeout(function () {
-                update($(that).val());
-            }, 500);
-        }
-    });
-
-    function update(value)
+    function ini_search_input()
     {
-        $("#results").load( "search/" + value.replace(/ /g,"+") + "" );
+        $('.search_input').on('keyup', function () {
+            var that = this;
+            if ($(that).val() == "")
+                $("#results").html('');
+            else
+            {
+                $("#results").html('<div class="loader"></div>');
+
+                if (timeout !== null) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(function () {
+                    update($(that).val(), $(that).attr('name'));
+                }, 500);
+            }
+        });
+    }
+
+    ini_search_input();
+
+    function update(value, id)
+    {
+        var splitted = id.split("_");
+        var true_id = splitted[1];
+        $("#results").load( "search_select/" + value.replace(/ /g,"+") + "/" + true_id );
+    }
+
+    function fill_answer(value, question_number)
+    {
+        debugger;
+        //$('#imdb_' + question_number).val(value);
+        //$("#results").html('');
+        var search_div = "input[name = 'imdb_" + question_number + "']";
+        $( search_div ).val( value );
+        $("#results").html('');
     }
 </script>
 
