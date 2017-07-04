@@ -43,7 +43,7 @@ class loginController extends BaseController
         }
         else
         {
-            return view('welcome')->with('error_code', 1);
+            return view('login')->with('error_code', 1);
         }
     }
 }

@@ -13,6 +13,13 @@
 </head>
 <body>
 <center>
+    <?php if (isset($error_code))
+    {
+        if ($error_code === 1)
+        {
+            echo '<label>Error: invalid identifier</label>';
+        }
+    }?>
     <form action="loginme" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         EMAIL : <input type="text" name="email"><br/>
