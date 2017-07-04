@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../bootstrap/css/index.css">
+    <link rel="stylesheet" href="{{ asset("../bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("../bootstrap/css/index.css") }}">
 
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
     </script>
