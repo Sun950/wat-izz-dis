@@ -7,43 +7,41 @@
     <title>Wat-izz-Dis - welcome</title>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="title">
-        <h1>Wat-izz-Dis</h1>
-    </div>
-    <a href="logoff">Log off</a>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="left-panel col-md-7">
-                    <div class="table-quizz-container">
-                        <h2 class="marged">Here some quizz...</h2>
-                        <div class="table-container">
-                            <table>
-                                <th>Quizz</th>
-                                <th>Author</th>
-                                @foreach($ltest as $item)
-                                    <tr>
-                                        <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getName() }}</a></td>
-                                        <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getOwnerId() }}</a></td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-pannel col-md-5">
-                    <div class="button-container">
-                        <form action="create-quizz" role="form">
-                            <button type="submit" class="btn btn-default">Create new</button>
-                        </form>
-                        <form action="my-quizzes.php" role="form">
-                            <button type="submit" class="button btn btn-default">My quizzes</button>
-                        </form>
-                    </div>
-                </div>
+    <header class="main-header clearfix">
+        <div class="container">
+            <div class="brand">
+                <a href="" class="logo" class="icon-list">Wat-izz-Dis</a>
             </div>
+            <nav class="main-nav">
+                <ul class="menu">
+                    <li><a href=""><span class="menu-title">Classement</span></a></li>
+                    <li><a href=""><span class="menu-title">Créer un quiz</span></a></li>
+                    <li><a href=""><span class="menu-title">Mes quiz</span></a></li>
+                    <li><a href=""><span class="menu-title">Déconnexion</span></a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <div class="container-fluid">
+        <h1>Bonjour Benjamin !</h1>
+        <h2>Venez essayer les derniers quizz ajouté sur le site</h2>
+        <table id="ver-minimalist">
+            <th>Quiz</th>
+            <th>Auteur</th>
+            <th>Nombre de questions</th>
+            <th>Points maximum</th>
+            <th>Lancer</th>
+            @foreach($ltest as $item)
+                <tr>
+                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getName() }}</a></td>
+                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getFirstname() }}</a></td>
+                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbQuestion() }}</a></td>
+                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbPoints() }}</a></td>
+                    <td><a href="{{URL::to('/start/' . $item->getId())}}"><div class="arrow">Go !</div></a></td>
+                </tr>
+            @endforeach
+        </table>
     </div>
 </div>
 </body>

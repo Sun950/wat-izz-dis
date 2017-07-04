@@ -62,7 +62,7 @@ class IMDb
 		$requestURL = $this->build_url('title/maindetails', $id, 'tconst');
 		$json = $this->fetchJSON($requestURL);
 		if(array_key_exists("error", $json)){
-			$data = $this->errorResponse($json->error);
+			$data = null;
 		}
 		else{
 			$data = $this->summary ? $this->summarise($json->data) : $json->data;

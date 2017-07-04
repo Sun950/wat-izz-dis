@@ -41,7 +41,7 @@ class SessionPlay
 
     public function getAnswer($pos)
     {
-        if (count($this->answers) < $pos)
+        if (count($this->answers) <= $pos)
             return "";
         return $this->answers[$pos];
     }

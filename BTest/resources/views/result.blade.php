@@ -16,7 +16,8 @@
         }
 
         #navbar-suggestionsearch a.highlighted {
-            background-color: #F8F1BE;
+            background-color: white;
+            width: 400px;
         }
         #navbar-suggestionsearch a:visited {
             color: #70579D;
@@ -174,65 +175,100 @@
             left:5.5px;
             top:9.5px;
         }
+
+        .float_right
+        {
+            float: right;
+        }
+        
+        .answer_title
+        {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="title">
-        <h1>Wat-izz-Dis</h1>
-    </div>
-    <a href="http://localhost/wat-izz-dis/BTest/public/logoff">Log off</a>
-    <div class="row">
-        <div class="col-sm-7">
-            <div class="table-quizz-container">
-                <div class="table-quizz-container">
-                    <h2 class="marged">Resultats du quiz test</h2>
-                    <div id="navbar-suggestionsearch" style="left: 140px;top: 38px;/* width: 534px; */">
-                        <div class="table-container">
-                            @foreach($result->getResultDetails() as $answer)
-                            <h2>
-                                @if($answer->IsCorrect())
-                                    <span id="checkmark"></span>
+    <header class="main-header clearfix">
+        <div class="container">
+            <div class="brand">
+                <a href="" class="logo" class="icon-list">Wat-izz-Dis</a>
+            </div>
+            <nav class="main-nav">
+                <ul class="menu">
+                    <li><a href=""><span class="menu-title">Classement</span></a></li>
+                    <li><a href=""><span class="menu-title">Créer un quiz</span></a></li>
+                    <li><a href=""><span class="menu-title">Mes quiz</span></a></li>
+                    <li><a href=""><span class="menu-title">Déconnexion</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="title">
+            <h1>Resultats du quiz test</h1>
+        </div>
+        <div class="row">
+            <div class="table-container">
+                @foreach($result->getResultDetails() as $answer)
+                <h2>
+                    @if($answer->IsCorrect())
+                        <span id="checkmark"></span>
+                    @else
+                        <span id="wrong"></span>
+                    @endif
+                     Question {{ $answer->getNumber() }}
+                </h2>
+                 <div id="navbar-suggestionsearch">
+                    <div class="col-sm-6">
+                        <div class="float_right">
+                            <div class="answer_title">Votre réponse :</div>
+                            <a class="poster highlighted">
+                                @if($answer->getAnswer() != null)
+                                    <img src="{{ $answer->getAnswer()->poster }}" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
+                                    <div class="suggestionlabel">
+                                        <span class="title">
+                                            {{ $answer->getAnswer()->title }}
+                                        </span>
+                                        <span class="year">{{ $answer->getAnswer()->year }}</span>
+                                        <div class="detail">{{ $answer->getAnswer()->type }}</div>
+                                    </div>
                                 @else
-                                    <span id="wrong"></span>
+                                    <img src="" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
+                                    <div class="suggestionlabel">
+                                        <span class="title">
+                                            Temps écoulé
+                                        </span>
+                                    </div>
                                 @endif
-                                 Question {{ $answer->getNumber() }}
-                            </h2>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <span>Bonne réponse :</span>
-                                    <a class="poster highlighted">
-                                        <img src="{{ $answer->getAnswer()->poster }}" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
-                                        <div class="suggestionlabel">
-                                            <span class="title">
-                                                {{ $answer->getAnswer()->title }}
-                                            </span>
-                                            <span class="year">{{ $answer->getAnswer()->year }}</span>
-                                            <div class="detail">{{ $answer->getAnswer()->type }}</div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <span>Votre réponse :</span>
-                                    <a class="poster highlighted">
-                                        <img src="{{ $answer->getCorrection()->poster }}" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
-                                        <div class="suggestionlabel">
-                                            <span class="title">
-                                                {{ $answer->getCorrection()->title }}
-                                            </span>
-                                            <span class="year">{{ $answer->getCorrection()->year }}</span>
-                                            <div class="detail">{{ $answer->getCorrection()->type }}</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
+                            </a>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="answer_title">Bonne réponse :</div>
+                        <a class="poster highlighted">
+                            @if($answer->getCorrection() != null)
+                                <img src="{{ $answer->getCorrection()->poster }}" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
+                                <div class="suggestionlabel">
+                                    <span class="title">
+                                        {{ $answer->getCorrection()->title }}
+                                    </span>
+                                    <span class="year">{{ $answer->getCorrection()->year }}</span>
+                                    <div class="detail">{{ $answer->getCorrection()->type }}</div>
+                                </div>
+                            @else
+                                <img src="" style="background:url('http://i.media-imdb.com/images/mobile/film-40x54.png')" width="40" height="54">
+                                <div class="suggestionlabel">
+                                    <span class="title">
+                                        Temps écoulé
+                                    </span>
+                                </div>
+                            @endif
+                        </a>
+                    </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
-</div>
-</body>
+    </body>
 </html>

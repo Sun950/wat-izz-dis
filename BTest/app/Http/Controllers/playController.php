@@ -55,6 +55,8 @@ class playController extends BaseController
 
         $question = playController::get_question($id, 1);
 
+        $question->setTotal($nb_questions);
+
         $sessionPlay = new \SessionPlay($id, $question->getName(), $nb_questions, 1);
 
         Session::put('sessionPlay', $sessionPlay);
@@ -80,36 +82,23 @@ class playController extends BaseController
             return redirect('/result');
         }
 
-        print_r($sessionPlay);
-
         $question = playController::get_question($sessionPlay->getIdQuiz(), $sessionPlay->getCurrentQuestion());
+
+        $question->setTotal($sessionPlay->getNbQuestions());
 
         return View::make('play')->with('question', $question);
     }
 
     public function result()
     {
-
         $imdb = new \IMDb(true, true, 0);
-
-        $result = new \Result("test", 3);
-
-        $result->addResultDetail(new \ResultDetails(true, $imdb->find_by_id("tt2560140"), $imdb->find_by_id("tt2560140"), 1));
-
-        $result->addResultDetail(new \ResultDetails(false, $imdb->find_by_id("tt2560140"), $imdb->find_by_id("tt5574490"), 2));
-
-        $result->addResultDetail(new \ResultDetails(true, $imdb->find_by_id("tt5574490"), $imdb->find_by_id("tt5574490"), 3));
-
-        $result->setCorrectAnswer(2);
-
-        return View::make('result')->with('result', $result);
 
         if (Session::get('sessionPlay') == null)
             return redirect("/");
 
         $sessionPlay = Session::get('sessionPlay');
 
-        $questions = resultController::get_all_questions($sessionPlay->getIdQuiz());
+        $questions = playController::get_all_questions($sessionPlay->getIdQuiz());
 
         $result = new \Result($sessionPlay->getName(), $sessionPlay->getNbQuestions());
 
@@ -121,7 +110,7 @@ class playController extends BaseController
             $question = $questions[$i];
             $answer = $sessionPlay->getAnswer($i);
 
-            $resultDetails = new \ResultDetails($question->getImdbId() == $answer, $question->getImdbId(), $answer, $i);
+            $resultDetails = new \ResultDetails($question->getImdbId() == $answer, $imdb->find_by_id($question->getImdbId()), $imdb->find_by_id($answer), $i + 1);
             $result->addResultDetail($resultDetails);
 
             if ($question->getImdbId() == $answer)

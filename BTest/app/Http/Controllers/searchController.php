@@ -29,7 +29,7 @@ class searchController extends BaseController
 
         $json = json_decode($content);
 
-        echo '<div id="navbar-suggestionsearch" style="left: 140px; top: 38px; width: 534px;">';
+        echo '<div id="navbar-suggestionsearch">';
 
         if( array_key_exists('d', $json) ){
             $exact = $json->{'d'};

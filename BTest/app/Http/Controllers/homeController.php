@@ -20,14 +20,20 @@ class homeController extends BaseController
 
     public function convertToModelList()
     {
-        $query = DB::table('t_tests')->get();
+        $query = DB::table('t_tests')
+            ->leftJoin('t_questions', 't_tests.id', '=', 't_questions.test_id')
+            ->leftJoin('t_users', 't_users.id', '=', 't_tests.owner_id')
+            ->select(DB::raw('owner_id, name, t_tests.id as id, count(*) as nb_question, sum(points) as nb_points, firstname'))
+            ->groupBy('t_tests.id')
+            ->get();
 
         $result = array();
 
         foreach ($query as $data)
         {
-            array_push($result, new \TestModel($data->owner_id, $data->name, $data->id));
+            array_push($result, new \TestModel($data->owner_id, $data->name, $data->id, $data->nb_question, $data->nb_points, $data->firstname));
         }
+
 
         return $result;
 

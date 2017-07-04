@@ -9,6 +9,7 @@ class Question
     private $number;
     private $name;
     private $points;
+    private $total;
 
     /**
      * Question constructor.
@@ -28,6 +29,22 @@ class Question
         $this->number = $number;
         $this->name = $name;
         $this->points = $points;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param mixed $total
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
     }
 
     /**
