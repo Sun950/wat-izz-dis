@@ -133,7 +133,7 @@
             <div id="Q1">
                 Q1 - Video url : <input name="url_1" />
                 Answer : <input class="search_input" name="imdb_1" />
-                points: <input type="number" name="points_1" />
+                points: <input type="number" min="0" max="99999" name="points_1" />
             </div>
         </div>
 
@@ -153,7 +153,7 @@
 
     $("#add_question").click(function () {
         nb += 1;
-        $("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input class="search_input" name="imdb_' + nb + '"/> points: <input type="number" name="points_' + nb + '"/></div>');
+        $("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input class="search_input" name="imdb_' + nb + '"/> points: <input type="number" min="0" max="99999" name="points_' + nb + '"/></div>');
             ini_search_input();
     })
 

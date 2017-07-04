@@ -20,6 +20,11 @@
         <testsuite name="Register Tests">
             <directory suffix="Test.php">./tests/Register</directory>
         </testsuite>
+
+        <testsuite name="Create test Tests">
+            <directory suffix="Test.php">./tests/CreateTest</directory>
+        </testsuite>
+
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

@@ -18,7 +18,7 @@ class CreateTestController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private function SaveTest($test_name)
+    public function SaveTest($test_name)
     {
         $id = DB::table('t_tests')
             ->insertGetId(
@@ -28,7 +28,7 @@ class CreateTestController
         return $id;
     }
 
-    private function SaveQuestion($test_id, $url, $imdb_id, $number, $points)
+    public function SaveQuestion($test_id, $url, $imdb_id, $number, $points)
     {
         $query = DB::table('t_questions')
             ->insert(
@@ -40,7 +40,7 @@ class CreateTestController
             );
     }
 
-    private function ValidQuestion($answer, $url, $score)
+    public function ValidQuestion($answer, $url, $score)
     {
         $valid = true;
 
@@ -61,16 +61,13 @@ class CreateTestController
         return true;
     }
 
-    private function CheckValidEntry(Request $req)
+    public function CheckValidEntry($test_name, $answer1, $url1, $point1)
     {
-        if (empty($req->input('test_name')))
+        if (empty($test_name))
         {
             return false;
         }
 
-        $answer1 = $req->input('imdb_1');
-        $url1 = $req->input('url_1');
-        $point1 = $req->input('points_1');
         if (!$this->ValidQuestion($answer1, $url1, $point1))
         {
             return false;
@@ -79,21 +76,81 @@ class CreateTestController
         return true;
     }
 
-    private function getYoutubeUrlValue($url)
+    public function getYoutubeUrlValue($url)
     {
         $separator = '?v=';
         $pos = strpos($url, $separator);
+
+        if ($pos == false)
+            return '';
 
         $result = substr($url, $pos + 3);
         return $result;
     }
 
-    public function CreateTest(Request $req)
+    public function ValidPoint($value)
     {
-        $Valid = $this->CheckValidEntry($req);
+        return $value < 100000 && $value >= 0;
+    }
+
+    public function checkForm(Request $req)
+    {
+        $Valid = $this->CheckValidEntry($req->input('test_name'),
+            $req->input('imdb_1'),
+            $req->input('url_1'),
+            $req->input('points_1'));
+
         if (!$Valid)
         {
-            echo("Invalid quizz name or at least one question is required");
+            return "Invalid quizz name or at least one question is required";
+        }
+        else
+        {
+            $count = 1;
+            foreach($req->all() as $name)
+            {
+
+                $url_brut = $req->input('url_' . $count);
+                $url = $this->getYoutubeUrlValue($url_brut);
+                $anwser = $req->input('imdb_' . $count);
+                $point = $req->input('points_' . $count);
+
+                $point_test = intval($point);
+
+                if (!is_null($url) && !is_null($anwser) && !is_null($point))
+                {
+                    if (!$this->ValidQuestion($anwser, $url ,$point) || $this->ValidPoint($point_test))
+                    {
+                        if (empty($url) && !empty($url_brut))
+                        {
+                            return "Error, make sure the url is a youtube video";
+                        }
+                        if ($this->ValidPoint($point_test))
+                        {
+                            return "Error, Point have to be greater than 0 and lower than 100000";
+                        }
+
+                        return "One question is invalid, verify that all field are filled and that points fields are a valid number";
+                    }
+                }
+                else //stop case, no more questions
+                {
+                    break;
+                }
+
+                $count++;
+            }
+        }
+        return "";
+    }
+
+    public function CreateTest(Request $req)
+    {
+
+        $error = $this->checkForm($req);
+        if ($error != "")
+        {
+            echo($error);
         }
         else
         {
@@ -113,18 +170,9 @@ class CreateTestController
                 $point = $req->input('points_' . $count);
 
 
-
                 if (!is_null($url) && !is_null($anwser) && !is_null($point))
                 {
-                    if ($this->ValidQuestion($anwser, $url ,$point))
-                    {
-                        $this->SaveQuestion($test_id, $url, $anwser, $count, $point);
-                    }
-                    else
-                    {
-                        echo("One question was invalid");
-                        break;
-                    }
+                    $this->SaveQuestion($test_id, $url, $anwser, $count, $point);
                 }
                 else //stop case, no more questions
                 {
@@ -138,6 +186,14 @@ class CreateTestController
 
     public function ShowForm(Request $req)
     {
-        return View::make('create-quizz');
+        if (Session::has('user_id'))
+        {
+            return View::make('create-quizz');
+        }
+        else
+        {
+            return redirect('/');
+        }
+
     }
 }
