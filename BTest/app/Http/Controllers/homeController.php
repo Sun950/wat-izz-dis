@@ -34,16 +34,24 @@ class homeController extends BaseController
             array_push($result, new \TestModel($data->owner_id, $data->name, $data->id, $data->nb_question, $data->nb_points, $data->firstname));
         }
 
-
         return $result;
+    }
 
+    public function getUserName()
+    {
+        $query = DB::table('t_users')
+            ->where("t_users.id", Session::get('user_id'))
+            ->first();
+
+        return $query;
     }
 
     public function home(Request $req)
     {
         if (Session::has('user_id')) {
             $ltest = $this->convertToModelList();
-            return View::make('homelog')->with('ltest', $ltest);
+            $user_infos = $this->getUserName();
+            return View::make('homelog')->with('ltest', $ltest)->with('user', $user_infos);
         }
         return view('welcome');
     }

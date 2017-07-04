@@ -10,7 +10,7 @@
     @include('layout.header')
 
     <div class="container-fluid">
-        <h1>Bonjour Benjamin !</h1>
+        <h1>Bonjour {{ $user->firstname }} !</h1>
         <h2>Venez essayer les derniers quizz ajouté sur le site</h2>
         <table id="ver-minimalist">
             <th>Quiz</th>
