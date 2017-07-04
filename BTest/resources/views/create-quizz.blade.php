@@ -118,6 +118,12 @@
 
     <h1 class="text-center">Créer un quizz</h1>
 
+    <div class="col-md-offset-4 col-md-4 text-danger">
+        <h4>
+            {{$error}}
+        </h4>
+    </div>
+
     <div class="text-center">
 
         <div class="row">

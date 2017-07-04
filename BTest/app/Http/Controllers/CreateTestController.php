@@ -102,7 +102,7 @@ class CreateTestController
 
         if (!$Valid)
         {
-            return "Invalid quizz name or at least one question is required";
+            return " Erreur : Il faut que le quizz possède un titre et au moins une question";
         }
         else
         {
@@ -117,20 +117,20 @@ class CreateTestController
 
                 $point_test = intval($point);
 
-                if (!is_null($url) && !is_null($anwser) && !is_null($point))
+                if (!empty($url) || !empty($anwser) || !empty($point))
                 {
                     if (!$this->ValidQuestion($anwser, $url ,$point) || !$this->ValidPoint($point_test))
                     {
                         if (empty($url) && !empty($url_brut))
                         {
-                            return "Error, make sure the url is a youtube video";
+                            return "Erreur : Le lien vers la vidéo n'est pas valide, verifier bien que ce soit un lien vers une vidéo youtube";
                         }
                         if (!$this->ValidPoint($point_test))
                         {
-                            return "Error, Point have to be greater than 0 and lower than 100000";
+                            return "Erreur : Le champs points doit être compris entre 0 et 99999";
                         }
 
-                        return "One question is invalid, verify that all field are filled and that points fields are a valid number";
+                        return "Erreur : Une des question n'est pas valide, vérifier que tout les champs sont bien rempli";
                     }
                 }
                 else //stop case, no more questions
@@ -150,7 +150,7 @@ class CreateTestController
         $error = $this->checkForm($req);
         if ($error != "")
         {
-            echo($error);
+            return View::make('create-quizz')->with('error', $error);
         }
         else
         {
@@ -181,6 +181,7 @@ class CreateTestController
 
                 $count++;
             }
+            return redirect('/');
         }
     }
 
@@ -188,7 +189,7 @@ class CreateTestController
     {
         if (Session::has('user_id'))
         {
-            return View::make('create-quizz');
+            return View::make('create-quizz')->with('error', '');
         }
         else
         {
