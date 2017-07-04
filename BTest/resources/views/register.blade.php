@@ -5,12 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Wat-izz-Dis - Inscription</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset("../bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("../bootstrap/css/index.css") }}">    
 
 </head>
+
+<style>
+  .pad-form {
+    width: 80%;
+    margin: auto;
+  }
+</style>
+
 <body>
 <center>
     <?php if (isset($error_code))
@@ -33,14 +43,29 @@
         }
 
      }?>
-    <form action="register" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        FIRSTNAME : <input type="text" name="firstname"><br/>
-        LASTNAME : <input type="text" name="lastname"><br/>
-        EMAIL : <input type="text" name="email"><br/>
-        PASSWORD : <input type="password" name="password"><br/>
-        <input type="submit" name="login" value="Register">
-    </form>
+     <h1 class="text-center">S'inscrire</h1>
+     <div class="text-center">
+         <div class="row">
+         </div>
+         <br />
+         <div>
+             <div class="col-md-offset-2 col-md-8">
+                 <form action="register" method="post">
+                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                     <div class="row">
+                         <div class="col-md-offset-2 col-md-8">
+                           Prenom : <input placeholder="Prenom..." class="form-control pad-form" type="text" name="firstname"><br/>
+                           Nom de famille : <input placeholder="Nom de famille..." class="form-control pad-form" type="text" name="lastname"><br/>
+                           Email : <input placeholder="Email..." class="form-control pad-form" type="text" name="email"><br/>
+                           Mot de passe : <input placeholder="Mot de passe..." class="search_input form-control pad-form" type="password" name="password" /></br>
+                         </div>
+                     </div>
+                     <br />
+                     <input class="btn btn-success btn-lg" type="submit" name="login" value="Login">
+                 </form>
+             </div>
+         </div>
+     </div>
 </center>
 </body>
 </html>
