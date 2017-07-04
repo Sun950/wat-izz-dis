@@ -32,8 +32,8 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8">
-                          Email : <input style="width: 80%; margin: auto" placeholder="Email..." class="form-control" type="text" name=""><br/>
-                          Mot de passe : <input style="width: 80%; margin: auto" placeholder="Mot de passe..." class="search_input form-control" name="" /></br>
+                          Email : <input style="width: 80%; margin: auto" placeholder="Email..." class="form-control" type="text" name="email"><br/>
+                          Mot de passe : <input style="width: 80%; margin: auto" placeholder="Mot de passe..." class="search_input form-control" type="password" name="password" /></br>
                         </div>
                     </div>
                     <br />
