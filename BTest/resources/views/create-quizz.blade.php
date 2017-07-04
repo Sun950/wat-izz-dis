@@ -116,7 +116,7 @@
 <body>
 @include('layout.header')
 
-    <h1 class="text-center">Créer un test</h1>
+    <h1 class="text-center">Créer un quizz</h1>
 
     <div class="text-center">
 
