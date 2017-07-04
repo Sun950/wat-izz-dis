@@ -49,8 +49,37 @@ class playController extends BaseController
         return $questions;
     }
 
+    public function secuCheck($id)
+    {
+
+        if (!Session::has('user_id'))
+            return false;
+
+        /* check if the test is not the owner of the test*/
+        $query_ta = DB::table('t_tests')
+            ->where('owner_id', Session::get('user_id'))
+            ->where('id', $id)
+            ->count();
+
+        if ($query_ta != 0)
+            return false;
+
+        $query_su = DB::table('t_score')
+            ->where('test_id', $id)
+            ->where('user_id', Session::get('user_id'))
+            ->count();
+
+        if ($query_su != 0)
+            return false;
+
+        return true;
+    }
+
     public function play($id) // PATH : start/{id}
     {
+        if (!$this->secuCheck($id))
+            return redirect('/');
+
         $nb_questions = DB::table('t_questions')->where('test_id', $id)->count();
 
         $question = playController::get_question($id, 1);
