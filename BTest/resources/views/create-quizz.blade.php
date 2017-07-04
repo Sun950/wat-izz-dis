@@ -114,37 +114,89 @@
     <title>Wat-izz-Dis - welcome</title>
 </head>
 <body>
-    <h1 class="text-center">Create your test</h1>
+@include('layout.header')
 
-    <button id="add_question" name="add_question">
-        Ajouter une question
-    </button>
-    <button id="remove_question" name="remove_question">
-        Enlever une question
-    </button>
-    <br />
-    <br />
+    <h1 class="text-center">Créer un test</h1>
 
-    <form action="create-quizz" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        Quizz name : <input type="text" name="test_name"><br/>
+    <div class="text-center">
 
-        <div id="questions">
-            <div id="Q1">
-                Q1 - Video url : <input name="url_1" />
-                Answer : <input class="search_input" name="imdb_1" />
-                points: <input type="number" min="0" max="99999" name="points_1" />
+        <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                <br/>
+                <h4>
+                    <b>
+                        <div id="question_number">
+                            Nombre de questions : 1
+                        </div>
+                        <button class="btn btn-primary" id="remove_question" name="remove_question">
+                            <div>
+                                <span style="font-size:1.5em;" class="glyphicon glyphicon-minus"></span>
+                            </div>
+                        </button>
+                        <button class="btn btn-primary" id="add_question" name="add_question">
+                            <div>
+                                <span style="font-size:1.5em;" class="glyphicon glyphicon-plus"></span>
+                            </div>
+                        </button>
+                    </b>
+                </h4>
             </div>
         </div>
+        <div class="row">
+
+        </div>
+        <br />
+        <div>
+            <div class="col-md-offset-2 col-md-8">
+                <form class="form-group" action="create-quizz" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8">
+                            Quizz name : <input class="form-control" type="text" name="test_name"><br/>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div id="questions">
+                        <div id="Q1">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <h4>Q1</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <input placeholder="URL Video" class="form-control" name="url_1" />
+                                </div>
+                                <div class="col-md-4">
+                                    <input placeholder="Réponse" class="search_input form-control" name="imdb_1" />
+                                </div>
+                                <div class="col-md-2">
+                                    <input placeholder="Points" class="form-control" type="number" min="0" max="99999" name="points_1" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-md-offset-3">
+                            <div id="results">
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <input class="btn btn-success btn-lg" type="submit" name="CreateTest" value="Créer quizz">
+                </form>
+
+            </div>
 
 
-
-        <div id="results">
         </div>
 
-        <input type="submit" name="CreateTest" value="create-quizz">
-    </form>
-
+    </div>
 
 </body>
 
@@ -153,8 +205,28 @@
 
     $("#add_question").click(function () {
         nb += 1;
-        $("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input class="search_input" name="imdb_' + nb + '"/> points: <input type="number" min="0" max="99999" name="points_' + nb + '"/></div>');
-            ini_search_input();
+        $('#question_number').html('Nombre de questions : '+ nb);
+        //$("#questions").append('<div id="Q' + nb + '">Q' + nb + ' - Video url : <input name="url_' + nb + '" /> Answer : <input class="search_input" name="imdb_' + nb + '"/> points: <input type="number" min="0" max="99999" name="points_' + nb + '"/></div>');
+        $("#questions").append(
+        '<div id="Q' + nb + '">' +
+            '<div class="row">' +
+                '<div class="col-md-1">' +
+                    '<h4>Q' + nb + '</h4>' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                    '<input placeholder="URL Video" class="form-control" name="url_' + nb + '" />' +
+                '</div>' +
+                '<div class="col-md-4">' +
+                    '<input placeholder="Réponse" class="search_input form-control" name="imdb_' + nb + '" />' +
+                '</div>' +
+                '<div class="col-md-2">' +
+                    '<input placeholder="Points" class="form-control" type="number" min="0" max="99999" name="points_' + nb + '" />' +
+                '</div>' +
+            '</div>' +
+        '</div>'
+        )
+
+        ini_search_input();
     })
 
     $("#remove_question").click(function () {
@@ -163,6 +235,7 @@
             $("#Q" + nb).remove();
             ini_search_input();
             nb -= 1;
+            $('#question_number').html('Nombre de questions : ' + nb);
         }
     })
 
@@ -177,7 +250,7 @@
                 $("#results").html('');
             else
             {
-                $("#results").html('<div class="loader"></div>');
+                $("#results").html('<div class="loader col-md-offset-4"></div>');
 
                 if (timeout !== null) {
                     clearTimeout(timeout);
