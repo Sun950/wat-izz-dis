@@ -23,28 +23,29 @@
 
 <body>
 <center>
-    <?php if (isset($error_code))
-    {
-        if ($error_code === 1)
-        {
-                echo '<label>Error: invalid email</label>';
-        }
-        else if ($error_code === 2)
-        {
-            echo '<label>Error: invalid password (min 1 letter up, 1 letter down and 1 number)</label>';
-        }
-        else if ($error_code === 3)
-        {
-            echo '<label>Error: invalid password (8-20 characteres)</label>';
-        }
-        else if ($error_code === 4)
-        {
-            echo '<label>Error: this email is already choose</label>';
-        }
 
-     }?>
      <h1 class="text-center">S'inscrire</h1>
      <div class="text-center">
+         <?php if (isset($error_code))
+         {
+             if ($error_code === 1)
+             {
+                 echo '<div class="alert alert-danger">Error: invalid email</div>';
+             }
+             else if ($error_code === 2)
+             {
+                 echo '<div class="alert alert-danger">Error: invalid password (min 1 letter up, 1 letter down and 1 number)</div>';
+             }
+             else if ($error_code === 3)
+             {
+                 echo '<div class="alert alert-danger">Error: invalid password (8-20 characteres)</div>';
+             }
+             else if ($error_code === 4)
+             {
+                 echo '<div class="alert alert-danger">Error: this email is already choose</div>';
+             }
+
+         }?>
          <div class="row">
          </div>
          <br />
