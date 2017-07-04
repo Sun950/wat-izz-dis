@@ -13,6 +13,8 @@
 
 Route::get('/', 'homeController@home');
 
+Route::get('/myquizz', 'myquizzController@myquizz');
+
 Route::get('/register', function (){
     return view('register');
 });

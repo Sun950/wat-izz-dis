@@ -7,7 +7,7 @@
             <ul class="menu">
                 <li><a href="{{URL::to("/leaderboard")}}"><span class="menu-title">Classement</span></a></li>
                 <li><a href="{{URL::to("/create-quizz")}}"><span class="menu-title">Créer un quiz</span></a></li>
-                <li><a href=""><span class="menu-title">Mes quiz</span></a></li>
+                <li><a href="{{URL::to("/myquizz")}}"><span class="menu-title">Mes quiz</span></a></li>
                 <li><a href="{{URL::to("/logoff")}}"><span class="menu-title">Déconnexion</span></a></li>
             </ul>
         </nav>

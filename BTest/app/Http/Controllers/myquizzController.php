@@ -14,18 +14,18 @@ use View;
 use DB;
 use Session;
 
-class homeController extends BaseController
+class myquizzController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function convertToModelList()
+    public function getMyOwnTest()
     {
         $query = DB::table('t_tests')
             ->leftJoin('t_questions', 't_tests.id', '=', 't_questions.test_id')
             ->leftJoin('t_users', 't_users.id', '=', 't_tests.owner_id')
             ->select(DB::raw('owner_id, name, t_tests.id as id, count(*) as nb_question, sum(points) as nb_points, firstname'))
             ->groupBy('t_tests.id')
-            ->where('owner_id', '!=', Session::get('user_id'))
+            ->where('owner_id', Session::get('user_id'))
             ->get();
 
         $result = array();
@@ -38,21 +38,11 @@ class homeController extends BaseController
         return $result;
     }
 
-    public function getUserName()
-    {
-        $query = DB::table('t_users')
-            ->where("t_users.id", Session::get('user_id'))
-            ->first();
-
-        return $query;
-    }
-
-    public function home(Request $req)
+    public function myquizz(Request $req)
     {
         if (Session::has('user_id')) {
-            $ltest = $this->convertToModelList();
-            $user_infos = $this->getUserName();
-            return View::make('homelog')->with('ltest', $ltest)->with('user', $user_infos);
+            $ltest = $this->getMyOwnTest();
+            return View::make('myquizz')->with('ltest', $ltest);
         }
         return view('welcome');
     }
