@@ -36,6 +36,7 @@ class LeaderboardController
                 't_users.lastname as lastname',
                 't_score.score as score',
                 't_score.question_succeed as question_succeed')
+            ->orderBy('t_score.score', 'desc')
             ->get();
 
         return $query;
@@ -64,7 +65,12 @@ class LeaderboardController
 
             $list_row = $this->getLeaderboardRows($test_id);
 
-            return View::make('leaderboard')->with('list_row', $list_row);
+            if ($list_row != null)
+                $test_name = $list_row[0]->getTestName();
+            else
+                $test_name = "";
+
+            return View::make('leaderboard')->with('list_row', $list_row)->with('test_name', $test_name);
         }
         return redirect('/');
     }

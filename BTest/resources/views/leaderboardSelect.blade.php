@@ -9,7 +9,7 @@
 <body>
 @include('layout.header')
 
-<h1 class="text-center">Top des joueurs par test</h1>
+<h1 class="text-center">Top des joueurs</h1>
 
 <h2>Sélectionnez le test :</h2>
 

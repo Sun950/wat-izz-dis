@@ -9,10 +9,10 @@
 <body>
 @include('layout.header')
 
-    <h1 class="text-center">Leaderboard</h1>
+    <h1 class="text-center">Top des joueurs du test <i>{{ $test_name  }}</i></h1>
 
     <table id="ver-minimalist">
-        <th>Auteur</th>
+        <th>Utilisateur</th>
         <th>Score</th>
         <th>Bonnes réponses</th>
         @foreach($list_row as $row)
