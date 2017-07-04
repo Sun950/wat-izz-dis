@@ -35,7 +35,34 @@ class homeController extends BaseController
             array_push($result, new \TestModel($data->owner_id, $data->name, $data->id, $data->nb_question, $data->nb_points, $data->firstname));
         }
 
+        $result = $this->checkIfNotAlreadyDone($result);
+
         return $result;
+    }
+
+    public function checkIfNotAlreadyDone($datarray)
+    {
+        $query = DB::table('t_score')
+            ->select(DB::raw('test_id'))
+            ->where('user_id', Session::get('user_id'))
+            ->get();
+
+        $totest = array();
+
+        foreach ($query as $data)
+        {
+            array_push($totest, $data->test_id);
+        }
+
+        $d = 0;
+        foreach ($datarray as $data)
+        {
+            if (in_array($data->getId(), $totest))
+                unset($datarray[$d]);
+            $d += 1;
+        }
+
+        return $datarray;
     }
 
     public function getUserName()
