@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RegisterCheckTest extends TestCase
 {
+
     public function test_control_email_good()
     {
         $email = "test@test.fr";
@@ -83,5 +84,21 @@ class RegisterCheckTest extends TestCase
         $password = "Test1234Test1234Test1234";
         $controller = new \BTest\Http\Controllers\registerController();
         $this->assertEquals(3, $controller->control_password($password));
+    }
+
+    public function test_check_password_ok()
+    {
+        $password = "Test1234";
+        $password_conf = "Test1234";
+        $controller = new \BTest\Http\Controllers\registerController();
+        $this->assertTrue($controller->check_password($password, $password_conf));
+    }
+
+    public function test_check_password_ko()
+    {
+        $password = "Test1234";
+        $password_conf = "Test1235";
+        $controller = new \BTest\Http\Controllers\registerController();
+        $this->assertFalse($controller->check_password($password, $password_conf));
     }
 }
