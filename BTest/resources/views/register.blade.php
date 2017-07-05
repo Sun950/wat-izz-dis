@@ -44,6 +44,10 @@
              {
                  echo '<div class="alert alert-danger">Error: this email is already choose</div>';
              }
+             else if ($error_code === 5)
+             {
+                 echo '<div class="alert alert-danger">Error: field password and confirm password does not match.</div>';
+             }
 
          }?>
          <div class="row">
@@ -55,10 +59,11 @@
                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                      <div class="row">
                          <div class="col-md-offset-2 col-md-8">
-                           Prenom : <input placeholder="Prenom..." class="form-control pad-form" type="text" name="firstname"><br/>
-                           Nom de famille : <input placeholder="Nom de famille..." class="form-control pad-form" type="text" name="lastname"><br/>
-                           Email : <input placeholder="Email..." class="form-control pad-form" type="text" name="email"><br/>
-                           Mot de passe : <input placeholder="Mot de passe..." class="search_input form-control pad-form" type="password" name="password" /></br>
+                             Prenom : <input placeholder="Prenom..." class="form-control pad-form" type="text" name="firstname"><br/>
+                             Nom de famille : <input placeholder="Nom de famille..." class="form-control pad-form" type="text" name="lastname"><br/>
+                             Email : <input placeholder="Email..." class="form-control pad-form" type="text" name="email"><br/>
+                             Mot de passe : <input placeholder="Mot de passe..." class="search_input form-control pad-form" type="password" name="password" /></br>
+                             Confirmer le mot de passe : <input placeholder="Re-entrez le mot de passe..." class="search_input form-control pad-form" type="password" name="conf_password" /></br>
                          </div>
                      </div>
                      <br />

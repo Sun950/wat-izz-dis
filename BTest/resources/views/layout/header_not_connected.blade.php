@@ -5,7 +5,7 @@
         </div>
         <nav class="main-nav">
             <ul class="menu">
-                <li><a href="{{URL::to("/register")}}"><span class="menu-title">S'inscire</span></a></li>
+                <li><a href="{{URL::to("/register")}}"><span class="menu-title">S'inscrire</span></a></li>
                 <li><a href="{{URL::to("/login")}}"><span class="menu-title">Se connecter</span></a></li>
             </ul>
         </nav>

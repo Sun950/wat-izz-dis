@@ -52,12 +52,23 @@ class registerController extends BaseController
         return substr($password, 7);
     }
 
+    public function check_password($password, $conf_password)
+    {
+        return $password === $conf_password;
+    }
+
     public function subscribe(Request $req)
     {
         $firstname = $req->input('firstname');
         $lastname = $req->input('lastname');
         $email = $req->input('email');
         $password = $req->input('password');
+        $conf_password = $req->input('conf_password');
+
+        if (!$this->check_password($password, $conf_password))
+        {
+            return view('register')->with('error_code', 5);
+        }
 
         if (!$this->control_email($email))
         {
