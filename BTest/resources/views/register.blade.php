@@ -35,19 +35,19 @@
              }
              else if ($error_code === 2)
              {
-                 echo '<div class="alert alert-danger">Erreur: mot de passe invalide (au moins 1 lettre minuscule, 1 lettre majuscule et 1 chiffre)</div>';
+                 echo '<div class="alert alert-danger">Erreur : mot de passe invalide (au moins 1 lettre minuscule, 1 lettre majuscule et 1 chiffre)</div>';
              }
              else if ($error_code === 3)
              {
-                 echo '<div class="alert alert-danger">Erreur: mot de passe invalide (8 à 20 caractères)</div>';
+                 echo '<div class="alert alert-danger">Erreur : mot de passe invalide (8 à 20 caractères)</div>';
              }
              else if ($error_code === 4)
              {
-                 echo '<div class="alert alert-danger">Erreur: cet email est déjà pris</div>';
+                 echo '<div class="alert alert-danger">Erreur : cet email est déjà pris</div>';
              }
              else if ($error_code === 5)
              {
-                 echo '<div class="alert alert-danger">Error: field password and confirm password does not match.</div>';
+                 echo '<div class="alert alert-danger">Erreur: Le mot de passe et sa confirmation sont différents.</div>';
              }
 
          }?>
