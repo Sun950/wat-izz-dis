@@ -18,6 +18,15 @@ class myquizzController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function delete($id)
+    {
+        $query = DB::table('t_tests')->where('id', '=', $id)->delete();
+
+        $query = DB::table('t_questions')->where('test_id', '=', $id)->delete();
+
+        return redirect('/myquizz');
+    }
+
     public function getMyOwnTest()
     {
         $query = DB::table('t_tests')
@@ -44,6 +53,6 @@ class myquizzController extends BaseController
             $ltest = $this->getMyOwnTest();
             return View::make('myquizz')->with('ltest', $ltest);
         }
-        return view('welcome');
+        return redirect('/');
     }
 }

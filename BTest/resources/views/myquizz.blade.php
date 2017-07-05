@@ -17,13 +17,29 @@
             <th>Points maximum</th>
             @foreach($ltest as $item)
                 <tr>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getName() }}</a></td>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbQuestion() }}</a></td>
-                    <td><a href="{{URL::to('/start/' . $item->getId())}}"> {{ $item->getNbPoints() }}</a></td>
+                    <td>{{$item->getName()}}</td>
+
+                    <td>{{$item->getNbQuestion()}}</td>
+
+                    <td>{{$item->getNbPoints()}}</td>
+
+                    <td>
+                        <div onclick="deletePost({{$item->getId()}})" class="btn btn-danger">
+                            Delete
+                        </div>
+                    </td>
                 </tr>
             @endforeach
         </table>
     </div>
 </div>
 </body>
+<script>
+    function deletePost(id) {
+        var ask = window.confirm("Are you sure you want to delete this test?");
+        if (ask) {
+            document.location.href = "myquizz/delete/" + id;
+        }
+    }
+</script>
 </html>
