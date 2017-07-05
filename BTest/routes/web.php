@@ -15,6 +15,8 @@ Route::get('/', 'homeController@home');
 
 Route::get('/myquizz', 'myquizzController@myquizz');
 
+Route::get('/myquizz/delete/{int}', 'myquizzController@delete');
+
 Route::get('/register', function (){
     return view('register');
 });
