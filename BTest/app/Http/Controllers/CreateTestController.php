@@ -85,6 +85,17 @@ class CreateTestController
             return '';
 
         $result = substr($url, $pos + 3);
+
+        $separator_end = '&';
+        $pos = strpos($result, $separator_end);
+
+        if ($pos == false)
+        {
+            return $result;
+        }
+
+        $result = substr($result, 0, $pos);
+
         return $result;
     }
 

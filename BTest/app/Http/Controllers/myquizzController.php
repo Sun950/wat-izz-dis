@@ -24,6 +24,8 @@ class myquizzController extends BaseController
 
         $query = DB::table('t_questions')->where('test_id', '=', $id)->delete();
 
+        $query = DB::table('t_score')->where('test_id', '=', $id)->delete();
+
         return redirect('/myquizz');
     }
 

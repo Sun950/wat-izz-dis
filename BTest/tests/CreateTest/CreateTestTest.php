@@ -31,6 +31,15 @@ class CreateTestTest extends TestCase
         $this->assertEquals($result, '9ttYOnvekGw');
     }
 
+    public function test_getYoutubeUrlValue_good03()
+    {
+        $controller = new CreateTestController();
+        $url = 'https://www.youtube.com/watch?v=9ttYOnvekGw&t=18';
+
+        $result = $controller->getYoutubeUrlValue($url);
+        $this->assertEquals($result, '9ttYOnvekGw');
+    }
+
     public function test_getYoutubeUrlValue_bad01()
     {
         $controller = new CreateTestController();
