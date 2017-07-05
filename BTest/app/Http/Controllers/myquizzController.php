@@ -20,12 +20,19 @@ class myquizzController extends BaseController
 
     public function delete($id)
     {
-        $query = DB::table('t_tests')->where('id', '=', $id)->delete();
+        if (Session::has('user_id')) {
 
-        $query = DB::table('t_questions')->where('test_id', '=', $id)->delete();
+            $query = DB::table('t_tests')->where('id', '=', $id)->select('owner_id')->first();
 
-        $query = DB::table('t_score')->where('test_id', '=', $id)->delete();
+            if ($query->owner_id == Session::get('user_id'))
+            {
+                $query = DB::table('t_tests')->where('id', '=', $id)->delete();
 
+                $query = DB::table('t_questions')->where('test_id', '=', $id)->delete();
+
+                $query = DB::table('t_score')->where('test_id', '=', $id)->delete();
+            }
+        }
         return redirect('/myquizz');
     }
 
