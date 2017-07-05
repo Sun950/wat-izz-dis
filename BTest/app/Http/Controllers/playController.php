@@ -127,6 +127,9 @@ class playController extends BaseController
 
         $sessionPlay = Session::get('sessionPlay');
 
+        if (!$this->secuCheck($sessionPlay->getIdQuiz()))
+            return redirect('/');
+
         $questions = playController::get_all_questions($sessionPlay->getIdQuiz());
 
         $result = new \Result($sessionPlay->getName(), $sessionPlay->getNbQuestions());
