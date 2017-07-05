@@ -150,6 +150,7 @@ class playController extends BaseController
         }
 
         $result->setCorrectAnswer($total_correct_answer);
+        $result->setTotalPoints($total_points);
 
         DB::table('t_score')->insert(
             ['test_id' => $sessionPlay->getIdQuiz(), 'user_id' => Session::get('user_id'), 'score' => $total_points, 'question_succeed' => $total_correct_answer]

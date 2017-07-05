@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset("../bootstrap/css/index.css") }}">
 </head>
 <body>
+    @include('layout.header_not_connected')
 <center>
     <h1 class="text-center">Se connecter</h1>
     <div class="text-center">
@@ -24,11 +25,12 @@
             {
                 if ($error_code === 1)
                 {
-                    echo '<div class="alert alert-danger">Error: invalid identifier</div>';
+                    echo '<div class="alert alert-danger">Identifiants invalides</div>';
                 }
             }?>
             <div class="col-md-offset-2 col-md-8">
                 <form action="loginme" method="post">
+                    <a style="color: white;" href="{{URL::to('/register')}}">Pas encore inscris ? Cliquez ici !</a><br /><br />
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8">

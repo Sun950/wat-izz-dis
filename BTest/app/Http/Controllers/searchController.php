@@ -46,7 +46,7 @@ class searchController extends BaseController
                             <?php echo $elt->{'l'}; ?>
                         </span>
                             <span class="extra"><?php if (array_key_exists('y', $elt)) echo $elt->{'y'}; ?></span>
-                            <div class="detail"><?php if (array_key_exists('s', $elt)) echo $elt->{'s'}; ?></div>
+                            <div class="detail"><?php if (array_key_exists('q', $elt)) echo $elt->{'q'}; ?></div>
                         </div>
                     </a>
                     <?php
@@ -84,7 +84,7 @@ class searchController extends BaseController
                             <?php echo $elt->{'l'}; ?>
                         </span>
                             <span class="extra"><?php if (array_key_exists('y', $elt)) echo $elt->{'y'}; ?></span>
-                            <div class="detail"><?php if (array_key_exists('s', $elt)) echo $elt->{'s'}; ?></div>
+                            <div class="detail"><?php if (array_key_exists('q', $elt)) echo $elt->{'q'}; ?></div>
                         </div>
                     </a>
                     <?php

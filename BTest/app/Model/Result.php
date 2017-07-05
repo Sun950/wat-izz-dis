@@ -5,6 +5,7 @@ class Result
     private $name;
     private $nb_questions;
     private $correct_answer;
+    private $total_points;
     private $result_details;
 
     /**
@@ -70,6 +71,22 @@ class Result
     public function setCorrectAnswer($correct_answer)
     {
         $this->correct_answer = $correct_answer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalPoints()
+    {
+        return $this->total_points;
+    }
+
+    /**
+     * @param mixed $total_points
+     */
+    public function setTotalPoints($total_points)
+    {
+        $this->total_points = $total_points;
     }
 
     /**

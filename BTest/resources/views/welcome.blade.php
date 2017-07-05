@@ -200,7 +200,7 @@
         <p>Wat-izz-Dis, c'est des quizz sur les films, séries, animés, jeux vidéos basés sur les énormes Youtube et IMDb</p>
         <ul class="actions">
             <li>
-                <button class="btn btn-1 btn-1a">C'est parti !</button>
+                <button class="btn btn-1 btn-1a" onclick="location.href = '{{URL::to("/login")}}';">C'est parti !</button>
             </li>
         </ul>
     </section>
@@ -208,7 +208,7 @@
         <div class="container">
             <header class="major">
                 <h2>Le site de quizz ultime</h2>
-                <p>Avec une interface épurée et une base de données constament actualisé, vivez les quizz comme jamais.</p>
+                <p>Avec une interface épurée et une base de données constamment actualisée, vivez les quizz comme jamais.</p>
                 <div class="row 150%">
                     <div class="4u 12u$(medium)">
                         <section class="box">

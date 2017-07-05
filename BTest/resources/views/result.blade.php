@@ -14,6 +14,9 @@
         <div class="title">
             <h1>Resultats du quiz test</h1>
         </div>
+        <div class="score" style="text-align: center; font-size: 19px; margin-bottom: 25px;">
+            Nombre de bonnes réponses : <b>{{ $result->getCorrectAnswer() }}/{{ $result->getNbQuestions() }}</b> - Nombre de points : <b>{{ $result->getTotalPoints() }}</b>
+        </div>
         <div class="row">
             <div class="table-container">
                 @foreach($result->getResultDetails() as $answer)

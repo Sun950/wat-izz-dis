@@ -22,6 +22,7 @@
 </style>
 
 <body>
+    @include('layout.header_not_connected')
 <center>
 
      <h1 class="text-center">S'inscrire</h1>
@@ -30,19 +31,19 @@
          {
              if ($error_code === 1)
              {
-                 echo '<div class="alert alert-danger">Error: invalid email</div>';
+                 echo '<div class="alert alert-danger">Erreur : email invalide</div>';
              }
              else if ($error_code === 2)
              {
-                 echo '<div class="alert alert-danger">Error: invalid password (min 1 letter up, 1 letter down and 1 number)</div>';
+                 echo '<div class="alert alert-danger">Erreur: mot de passe invalide (au moins 1 lettre minuscule, 1 lettre majuscule et 1 chiffre)</div>';
              }
              else if ($error_code === 3)
              {
-                 echo '<div class="alert alert-danger">Error: invalid password (8-20 characteres)</div>';
+                 echo '<div class="alert alert-danger">Erreur: mot de passe invalide (8 à 20 caractères)</div>';
              }
              else if ($error_code === 4)
              {
-                 echo '<div class="alert alert-danger">Error: this email is already choose</div>';
+                 echo '<div class="alert alert-danger">Erreur: cet email est déjà pris</div>';
              }
              else if ($error_code === 5)
              {
@@ -67,7 +68,7 @@
                          </div>
                      </div>
                      <br />
-                     <input class="btn btn-success btn-lg" type="submit" name="login" value="Login">
+                     <input class="btn btn-success btn-lg" type="submit" name="login" value="S'inscrire">
                  </form>
              </div>
          </div>

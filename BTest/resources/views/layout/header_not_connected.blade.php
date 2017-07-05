@@ -1,7 +1,7 @@
 <header class="main-header clearfix">
     <div class="container">
         <div class="brand">
-            <a href="" class="logo" class="icon-list">Wat-izz-Dis</a>
+            <a href="{{URL::to('/')}}" class="logo" class="icon-list">Wat-izz-Dis</a>
         </div>
         <nav class="main-nav">
             <ul class="menu">
