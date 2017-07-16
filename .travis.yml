@@ -3,6 +3,9 @@ language: php
 php:
     - 7.0
 
+notification:
+    slack: mti2018:0seGiAUl4SB3agRocEnT7qoe
+
 before_script:
     - chmod 777 -R storage
     - cp .env.travis .env
