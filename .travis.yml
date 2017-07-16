@@ -1,0 +1,12 @@
+language: php
+
+php:
+    - 7.0
+
+install:
+    - travis_retry composer install --no-interaction
+    - cp .env.example .env
+    - php artisan key:generate
+
+script:
+    - vendor/bin/phpunit
