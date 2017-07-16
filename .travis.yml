@@ -5,6 +5,8 @@ php:
 
 notification:
     slack: mti2018:0seGiAUl4SB3agRocEnT7qoe
+    on_failure: always
+    on_success: always
 
 before_script:
     - chmod 777 -R storage
