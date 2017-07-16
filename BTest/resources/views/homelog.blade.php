@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ asset("../bootstrap/css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("../bootstrap/css/index.css") }}">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>Wat-izz-Dis - welcome</title>
 </head>
 <body>

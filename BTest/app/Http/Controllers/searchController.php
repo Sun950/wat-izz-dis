@@ -2,7 +2,7 @@
 
 namespace BTest\Http\Controllers;
 
-include (app_path().'/model/Question.php');
+include (app_path().'/Model/Question.php');
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

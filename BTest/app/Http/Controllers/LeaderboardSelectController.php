@@ -14,7 +14,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-include(app_path() . '/model/LeaderboardSelect.php');
+include(app_path() . '/Model/LeaderboardSelect.php');
 
 use View;
 use DB;

@@ -2,10 +2,10 @@
 
 namespace BTest\Http\Controllers;
 
-include (app_path().'/model/Question.php');
-include (app_path().'/model/SessionPlay.php');
-include (app_path().'/model/Result.php');
-include (app_path().'/model/IMDb.php');
+include (app_path().'/Model/Question.php');
+include (app_path().'/Model/SessionPlay.php');
+include (app_path().'/Model/Result.php');
+include (app_path().'/Model/IMDb.php');
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

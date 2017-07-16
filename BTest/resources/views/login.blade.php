@@ -9,8 +9,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset("../bootstrap/css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{ asset("../bootstrap/css/index.css") }}">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     @include('layout.header_not_connected')
