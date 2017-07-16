@@ -3,9 +3,19 @@ language: php
 php:
     - 7.0
 
-install:
-    - travis_retry composer install --no-interaction
-    - cp .env.example .env
+before_script:
+    - mkdir bootstrap/cache
+    - mkdir storage
+    - mkdir storage/app
+    - mkdir storage/framework
+    - mkdir storage/framework/sessions
+    - mkdir storage/framework/cache
+    - mkdir storage/framework/views
+    - chmod 777 -R storage
+    - cp .env.travis .env
+    - mysql -e 'create databse blind_db'
+    - composer self-update
+    - composer install --no-interaction
     - php artisan key:generate
 
 script:
