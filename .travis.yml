@@ -12,6 +12,7 @@ before_script:
     - chmod 777 -R storage
     - cp .env.travis .env
     - mysql -e 'create database blind_db;'
+    - mysql -u root --default-character-set=utf8 blind_db < bdd/blind_db.sql
     - composer self-update
     - composer install --no-interaction
     - php artisan key:generate
