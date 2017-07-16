@@ -3,7 +3,7 @@ language: php
 php:
     - 7.0
 
-notification:
+notifications:
     slack: mti2018:0seGiAUl4SB3agRocEnT7qoe
     on_failure: always
     on_success: always
