@@ -19,3 +19,8 @@ before_script:
 
 script:
     - vendor/bin/phpunit
+
+deploy:
+    provider: heroku
+    api-key: 3bc82458-d3a3-4bd8-bdce-8cfc9b8c1d8e
+    app: wid-devops
