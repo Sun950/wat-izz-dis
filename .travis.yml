@@ -25,6 +25,4 @@ deploy:
     api-key: 3bc82458-d3a3-4bd8-bdce-8cfc9b8c1d8e
     app: wid-devops
     run:
-       - "composer install"
-       - "cp .env.travis .env && ls -a"
        - "php artisan key:generate"
