@@ -26,4 +26,5 @@ deploy:
     app: wid-devops
     run:
        - "cp .env.travis .env"
+       - "ls -la"
        - "php artisan key:generate"
